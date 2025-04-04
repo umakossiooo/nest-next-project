@@ -79,7 +79,7 @@ export function DataTable<TData extends { id: number }, TValue>({ // Constrain T
 
         try {
             await Promise.all(selectedIds.map((id) => deleteProduct(id)));
-            alert("Selected items deleted successfully!");
+            alert("Are you sure you want to delete the selected items?");
             table.setRowSelection({});
         } catch (error) {
             console.error("Failed to delete items:", error);

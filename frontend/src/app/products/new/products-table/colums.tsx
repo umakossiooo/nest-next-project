@@ -73,7 +73,7 @@ export const columns: ColumnDef<Product>[] = [
         id: "actions",
         cell: ({ row }) => {
             const product = row.original;
-            const router = useRouter(); // Initialize useRouter
+            const router = useRouter();
 
             return (
                 <DropdownMenu>

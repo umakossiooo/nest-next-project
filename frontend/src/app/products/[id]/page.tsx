@@ -1,32 +1,29 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { ProductForm } from "../new/product-form";
 import { getProductById } from "../products.api";
-import Link from "next/link"; // Updated import
-import { buttonVariants } from "@/components/ui/button";
 
 interface Props {
     params: {
-        id: number;
-    }
+        id: string;
+    };
 }
 
-async function ProductDetailPage({ params }: Props) {
-    console.log(params);
-    const product = await getProductById(params.id);
+export default async function NewProductPage({ params }: Props) {
+
+    const id = parseInt(params.id, 10);
+
+    const product = await getProductById(id);
+
     return (
         <div className="h-screen flex items-center justify-center">
-            <Card className="w-96">
-                <CardHeader className="flex items-center justify-between">
-                    <CardTitle>Product Detail {product.id}</CardTitle>
-                    <Link href="/" className={buttonVariants()}>Go back</Link>
+            <Card>
+                <CardHeader className="text-2xl font-bold">
+                    {id ? "Update Product" : "Create Product"}
                 </CardHeader>
                 <CardContent>
-                    <h1 className="text-2xl font-bold">{product.name}</h1>
-                    <p className="text-lg">Price: ${product.price}</p>
+                    <ProductForm product={product} id={id} />
                 </CardContent>
             </Card>
         </div>
     );
-
 }
-
-export default ProductDetailPage;
