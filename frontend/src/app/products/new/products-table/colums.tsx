@@ -85,10 +85,14 @@ export const columns: ColumnDef<Product>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem onClick={() => { router.push(`/products/${product.id}/edit`) }}>
+                        <DropdownMenuItem onClick={(e) => { 
+                            e.stopPropagation();
+                            router.push(`/products/${product.id}/edit`) }}>
                             Edit
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => { router.push(`/products/${product.id}`) }}>
+                        <DropdownMenuItem onClick={(e) => { 
+                            e.stopPropagation();
+                            router.push(`/products/${product.id}`) }}>
                             View
                         </DropdownMenuItem>
                     </DropdownMenuContent>

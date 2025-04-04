@@ -40,6 +40,11 @@ export async function updateProduct(id: number, productData: any) {
         },
         body: JSON.stringify(productData),
     })
+
+    if (!res.ok) {
+        throw new Error(`Failed to update product with id ${id}`);
+    }
+    
     const data = await res.json();
     console.log(data);
 }

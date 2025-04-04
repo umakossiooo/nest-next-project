@@ -1,27 +1,42 @@
-'use client'
+'use client';
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { Button } from "@/components/ui/button";
-import { createProduct } from "../products.api"
+import { createProduct, updateProduct } from "../products.api";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
-export const dynamic = "force-dynamic";
+interface ProductFormProps {
+    product: any;
+    id?: number;
+}
 
-export function ProductForm() {
+export function ProductForm({ product, id }: ProductFormProps) {
+    const { register, handleSubmit } = useForm({
+        defaultValues: {
+            name: product?.name || "",
+            price: product?.price || "",
+        },
+    });
 
-    const { register, handleSubmit } = useForm();
     const router = useRouter();
 
-    const onSubmit = handleSubmit(async(data)  => {
-        console.log(data);
-        await createProduct({
-            ...data,
-            price: parseFloat(data.price),
-        });
-        router.push('/')
+    const onSubmit = handleSubmit(async (data) => {
+        if (id) {
+            await updateProduct(id, {
+                ...data,
+                price: parseFloat(data.price),
+            });
+        } else {
+            await createProduct({
+                ...data,
+                price: parseFloat(data.price),
+            });
+        }
+        router.push("/");
         router.refresh();
-    })
+    });
 
     return (
         <form className="flex flex-col gap-6" onSubmit={onSubmit}>
@@ -33,7 +48,9 @@ export function ProductForm() {
                 <Input {...register("price")} />
             </div>
 
-            <Button >Create Product</Button>
+            <Button type="submit">
+                {id ? "Update" : "Create"}
+            </Button>
         </form>
-    )
+    );
 }
