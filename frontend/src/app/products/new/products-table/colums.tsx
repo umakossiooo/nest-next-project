@@ -88,33 +88,42 @@ export const columns: ColumnDef<Product>[] = [
         id: "actions",
         cell: ({ row }) => {
             const product = row.original;
-            const router = useRouter();
 
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem onClick={(e) => {
-                            e.stopPropagation();
-                            router.push(`/products/${product.id}/edit`)
-                        }}>
-                            Edit
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={(e) => {
-                            e.stopPropagation();
-                            router.push(`/products/${product.id}`)
-                        }}>
-                            View
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            );
+            return <ActionMenu product={product} />;
         },
     },
 ];
+
+export function ActionMenu({ product }: { product: { id: number } }) {
+    const router = useRouter();
+
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                    <span className="sr-only">Open menu</span>
+                    <MoreHorizontal className="h-4 w-4" />
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(`/products/${product.id}/edit`);
+                    }}
+                >
+                    Edit
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(`/products/${product.id}`);
+                    }}
+                >
+                    View
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
+}

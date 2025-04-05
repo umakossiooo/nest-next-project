@@ -5,15 +5,13 @@ import { buttonVariants } from "@/components/ui/button";
 
 interface Props {
     params: {
-        id: string; // `id` is passed as a string in dynamic routes
+        id: string;
     };
 }
 
 export default async function ProductDetailsPage({ params }: Props) {
-    // Parse `params.id` as a number
     const id = parseInt(params.id, 10);
 
-    // Fetch the product data
     const product = await getProductById(id);
 
     if (!product) {
@@ -24,10 +22,8 @@ export default async function ProductDetailsPage({ params }: Props) {
                         Product Not Found
                     </CardHeader>
                     <CardContent>
-                        <Link href="/">
-                            <Button variant="outline" className="mt-4">
-                                Go to Home
-                            </Button>
+                        <Link href="/" className={buttonVariants()}>
+                            Go back
                         </Link>
                     </CardContent>
                 </Card>

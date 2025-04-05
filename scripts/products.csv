@@ -1,4 +1,4 @@
-name,price
-Xbox Controller,1299.99
-The Witcher 3,599.50
-Batman Movie,149.99
+name,price,category,description
+Gaming Laptop,1499.99,Electronics,This is a high-end laptop with great performance.
+Leather Shoes,89.99,Materials,Stylish shoes for formal events.
+Milk,2.50,Food,Organic whole milk from local farms.

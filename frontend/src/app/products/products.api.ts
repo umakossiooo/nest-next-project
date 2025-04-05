@@ -39,18 +39,19 @@ export async function updateProduct(id: number, productData: any) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(productData),
-    })
+    });
 
     if (!res.ok) {
         throw new Error(`Failed to update product with id ${id}`);
     }
-    
-    const data = await res.json();
-    console.log(data);
+
+    return res.json();
 }
 
 export async function getProductById(id: number) {
     const res = await fetch(`http://localhost:8000/api/products/${id}`);
-    const data = await res.json();
-    return data;
+    if (!res.ok) {
+        throw new Error(`Failed to fetch product with id ${id}`);
+    }
+    return res.json();
 }

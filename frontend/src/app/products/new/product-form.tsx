@@ -25,19 +25,23 @@ export function ProductForm({ product, id }: ProductFormProps) {
     const router = useRouter();
 
     const onSubmit = handleSubmit(async (data) => {
-        if (id) {
-            await updateProduct(id, {
-                ...data,
-                price: parseFloat(data.price),
-            });
-        } else {
-            await createProduct({
-                ...data,
-                price: parseFloat(data.price),
-            });
+        try {
+            if (id) {
+                await updateProduct(id, {
+                    ...data,
+                    price: parseFloat(data.price),
+                });
+            } else {
+                await createProduct({
+                    ...data,
+                    price: parseFloat(data.price),
+                });
+            }
+            router.push("/");
+            router.refresh();
+        } catch (error) {
+            console.error("Error submitting form:", error);
         }
-        router.push("/");
-        router.refresh();
     });
 
     return (

@@ -11,7 +11,6 @@ interface Props {
 export default async function NewProductPage({ params }: Props) {
     const id = params?.id ? parseInt(params.id, 10) : undefined;
     const product = id ? await getProductById(id) : null;
-
     return (
         <div className="h-screen flex items-center justify-center">
             <Card>
