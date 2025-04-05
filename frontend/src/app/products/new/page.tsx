@@ -4,21 +4,22 @@ import { getProductById } from "../products.api";
 
 interface Props {
     params: {
-        id: number;
+        id?: string;
     };
 }
 
 export default async function NewProductPage({ params }: Props) {
-    const product = await getProductById(params.id);
+    const id = params?.id ? parseInt(params.id, 10) : undefined;
+    const product = id ? await getProductById(id) : null;
 
     return (
         <div className="h-screen flex items-center justify-center">
             <Card>
                 <CardHeader className="text-2xl font-bold">
-                    {params.id ? "Update Product" : "Create Product"}
+                    {id ? "Update Product" : "Create Product"}
                 </CardHeader>
                 <CardContent>
-                    <ProductForm product={product} id={params.id} />
+                    <ProductForm product={product} id={id} />
                 </CardContent>
             </Card>
         </div>
