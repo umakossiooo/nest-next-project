@@ -1,25 +1,26 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { MoreHorizontal } from "lucide-react"
-import { Checkbox } from "@/components/ui/checkbox"
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { MoreHorizontal } from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useRouter } from "next/navigation"; // Import useRouter
+} from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 export type Product = {
     id: number;
     name: string;
     price: number;
+    category: string;
+    description: string;
 };
-
 
 export const columns: ColumnDef<Product>[] = [
     {
@@ -70,6 +71,20 @@ export const columns: ColumnDef<Product>[] = [
         },
     },
     {
+        accessorKey: "category",
+        header: () => <div className="text-left">Category</div>,
+        cell: ({ row }) => (
+            <div className="text-left">{row.getValue("category")}</div>
+        ),
+    },
+    {
+        accessorKey: "description",
+        header: () => <div className="text-left">Description</div>,
+        cell: ({ row }) => (
+            <div className="text-left">{row.getValue("description")}</div>
+        ),
+    },
+    {
         id: "actions",
         cell: ({ row }) => {
             const product = row.original;
@@ -85,14 +100,16 @@ export const columns: ColumnDef<Product>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem onClick={(e) => { 
+                        <DropdownMenuItem onClick={(e) => {
                             e.stopPropagation();
-                            router.push(`/products/${product.id}/edit`) }}>
+                            router.push(`/products/${product.id}/edit`)
+                        }}>
                             Edit
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={(e) => { 
+                        <DropdownMenuItem onClick={(e) => {
                             e.stopPropagation();
-                            router.push(`/products/${product.id}`) }}>
+                            router.push(`/products/${product.id}`)
+                        }}>
                             View
                         </DropdownMenuItem>
                     </DropdownMenuContent>

@@ -12,6 +12,7 @@ import {
     useReactTable,
     getPaginationRowModel,
     getSortedRowModel,
+    Row,
 } from "@tanstack/react-table"
 
 import {
@@ -128,7 +129,7 @@ export function DataTable<TData extends { id: number }, TValue>({ // Constrain T
                                 })}
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <Button variant="destructive" onClick={handleDelete}>Delete</Button> {/* Attach handleDelete */}
+                    <Button variant="destructive" onClick={handleDelete}>Delete</Button>
                 </div>
             </div>
             <div className="rounded-md border">

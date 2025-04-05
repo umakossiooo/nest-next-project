@@ -10,4 +10,10 @@ export class Product {
 
     @Column('decimal', { precision: 10, scale: 2 })
     price: number;
+
+    @Column()
+    category: string;
+
+    @Column()
+    description: string;
 }

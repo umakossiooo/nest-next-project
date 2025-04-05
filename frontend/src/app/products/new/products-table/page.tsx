@@ -8,6 +8,8 @@ async function getData(): Promise<Product[]> {
     id: product.id,
     name: product.name,
     price: product.price,
+    category: product.category,
+    description: product.description,
   }))
 }
 

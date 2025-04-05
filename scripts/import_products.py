@@ -1,8 +1,8 @@
 import csv
-import requests
 import time
 import os
 import sys
+import requests
 
 # Get base URL from environment variable or command-line argument
 BASE_URL = os.getenv("API_URL") or (sys.argv[1] if len(sys.argv) > 1 else None)

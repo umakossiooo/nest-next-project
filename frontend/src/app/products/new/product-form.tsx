@@ -17,6 +17,8 @@ export function ProductForm({ product, id }: ProductFormProps) {
         defaultValues: {
             name: product?.name || "",
             price: product?.price || "",
+            category: product?.category || "",
+            description: product?.description || "",
         },
     });
 
@@ -41,11 +43,17 @@ export function ProductForm({ product, id }: ProductFormProps) {
     return (
         <form className="flex flex-col gap-6" onSubmit={onSubmit}>
             <div className="flex flex-col gap-2">
-                <Label>Product name</Label>
+                <Label>Product Name</Label>
                 <Input {...register("name")} />
 
                 <Label>Price</Label>
                 <Input {...register("price")} />
+
+                <Label>Category</Label>
+                <Input {...register("category")} />
+
+                <Label>Description</Label>
+                <Input {...register("description")} />
             </div>
 
             <Button type="submit">

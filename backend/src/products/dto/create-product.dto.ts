@@ -8,4 +8,12 @@ export class CreateProductDto {
     @IsNotEmpty()
     @IsNumber()
     price: number;
+
+    @IsNotEmpty()
+    @IsString()
+    category: string;
+
+    @IsNotEmpty()
+    @IsString()
+    description: string;
 }
