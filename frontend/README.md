@@ -1,3 +1,8 @@
+## Create a .env.local file with this:
+
+NEXT_PUBLIC_API_BASE_URL=http://localhost:4000/api
+
+
 ## How to run
 
 ```bash

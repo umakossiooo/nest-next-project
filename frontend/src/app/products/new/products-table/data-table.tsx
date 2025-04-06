@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useRouter } from "next/navigation";
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -32,15 +33,14 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import { deleteProduct } from "@/app/products/products.api"; // Import the delete API
-import { useRouter } from "next/router"
+import { deleteProduct } from "@/app/products/products.api";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
 }
 
-export function DataTable<TData extends { id: number }, TValue>({ // Constrain TData to include 'id'
+export function DataTable<TData extends { id: number }, TValue>({
     columns,
     data,
 }: DataTableProps<TData, TValue>) {
@@ -71,17 +71,21 @@ export function DataTable<TData extends { id: number }, TValue>({ // Constrain T
         },
     })
 
+    const router = useRouter();
+
     const handleDelete = async () => {
         const selectedRows = table.getSelectedRowModel().rows;
-
         const selectedIds = selectedRows.map((row) => row.original.id);
 
         console.log("Selected IDs for deletion:", selectedIds);
 
         try {
             await Promise.all(selectedIds.map((id) => deleteProduct(id)));
-            alert("Are you sure you want to delete the selected items?");
+            alert("Items deleted successfully.");
             table.setRowSelection({});
+            
+            // Refresh the page
+            router.refresh();
         } catch (error) {
             console.error("Failed to delete items:", error);
             alert("Failed to delete selected items.");
