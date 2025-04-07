@@ -59,7 +59,7 @@ export const columns: ColumnDef<Product>[] = [
     },
     {
         accessorKey: "price",
-        header: () => <div className="text-right">Price</div>,
+        header: () => <div className="text-center">Price</div>,
         cell: ({ row }) => {
             const price = parseFloat(row.getValue("price"));
             const formatted = new Intl.NumberFormat("en-US", {
@@ -67,21 +67,21 @@ export const columns: ColumnDef<Product>[] = [
                 currency: "USD",
             }).format(price);
 
-            return <div className="text-right font-medium">{formatted}</div>;
+            return <div className="text-center">{formatted}</div>;
         },
     },
     {
         accessorKey: "category",
-        header: () => <div className="text-left">Category</div>,
+        header: () => <div className="text-center">Category</div>,
         cell: ({ row }) => (
-            <div className="text-left">{row.getValue("category")}</div>
+            <div className="text-center">{row.getValue("category")}</div>
         ),
     },
     {
         accessorKey: "description",
-        header: () => <div className="text-left">Description</div>,
+        header: () => <div className="text-center">Description</div>,
         cell: ({ row }) => (
-            <div className="text-left">{row.getValue("description")}</div>
+            <div className="text-center">{row.getValue("description")}</div>
         ),
     },
     {
