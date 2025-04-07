@@ -9,10 +9,12 @@ interface Props {
     };
 }
 
-export default async function ProductDetailsPage({ params }: Props) {
-    const id = parseInt(params.id, 10);
+export default async function ProductDetailsPage(context: { params: Promise<Props["params"]> }) {
+    const { id } = await context.params;
 
-    const product = await getProductById(id);
+    const productId = parseInt(id, 10);
+
+    const product = await getProductById(productId);
 
     if (!product) {
         return (

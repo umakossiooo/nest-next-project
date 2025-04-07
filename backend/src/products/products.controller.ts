@@ -13,28 +13,32 @@ export class ProductsController {
   @ApiOperation({ summary: 'Create a new product' })
   @ApiResponse({ status: 201, description: 'Product created successfully' })
   async create(@Body() createProductDto: CreateProductDto) {
-    return await this.productsService.create(createProductDto);
+    await this.productsService.create(createProductDto);
+    return { message: 'Product created successfully' };
   }
 
   @Get()
   @ApiOperation({ summary: 'Get all products' })
   @ApiResponse({ status: 200, description: 'Products retrieved successfully' })
   async findAll() {
-    return await this.productsService.findAll();
+    await this.productsService.findAll();
+    return { message: 'Products retrieved successfully' };
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get a product by ID' })
   @ApiResponse({ status: 200, description: 'Product retrieved successfully' })
   async findOne(@Param('id') id: string) {
-    return await this.productsService.findOne(+id);
+    await this.productsService.findOne(+id);
+    return { message: 'Product retrieved successfully' };
   }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update a product by ID' })
   @ApiResponse({ status: 200, description: 'Product updated successfully' })
   async update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return await this.productsService.update(+id, updateProductDto);
+    await this.productsService.update(+id, updateProductDto);
+    return { message: 'Product updated successfully' };
   }
 
   @Delete(':id')
